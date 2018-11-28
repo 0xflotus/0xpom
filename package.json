@@ -5,6 +5,7 @@
   "author": "0xflotus",
   "license": "MIT",
   "dependencies": {
+    "dayjs": "^1.7.7",
     "suncalc": "^1.8.0"
   }
 }
