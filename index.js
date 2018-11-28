@@ -9,7 +9,10 @@ if (["-h", "--help", "info"].some(e => process.argv.includes(e))) {
   if (process.argv[2] === undefined) {
     console.log(todaysValue().name);
   } else {
-    if (process.argv[2] === "-e" && process.argv[3] === undefined) {
+    if (
+      ["-e", "--emoji"].some(e => process.argv[2] === e) &&
+      process.argv[3] === undefined
+    ) {
       console.log(todaysValue().emoji);
     } else {
       if (
