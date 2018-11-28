@@ -13,7 +13,7 @@ if (testFlags(["-h", "--help", "info"])) {
 } else if (testFlags(["-d"])) {
   console.log(
     validDate.test(process.argv[3])
-      ? `${Math.floor(
+      ? `${Math.round(
           SunCalc.getMoonPosition(
             dayjs(process.argv[process.argv.indexOf("-d") + 1]).toDate()
           ).distance
