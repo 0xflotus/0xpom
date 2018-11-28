@@ -4,7 +4,7 @@ const dayjs = require("dayjs");
 const packageName = "0xpom";
 
 if (["-h", "--help", "info"].some(e => process.argv.includes(e))) {
-  console.log("Usage: 0xpom [date]");
+  console.log(`Usage: ${packageName} [date]`);
 } else {
   if (process.argv[2] === undefined) {
     console.log(todaysValue().name);
