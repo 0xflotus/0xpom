@@ -1,4 +1,4 @@
-const { getMoonIllumination } = require("suncalc");
+const SunCalc = require("suncalc");
 const dayjs = require("dayjs");
 
 if (process.argv[2] === undefined) {
@@ -22,7 +22,7 @@ if (process.argv[2] === undefined) {
 }
 
 function getValue(date) {
-  return parseFloat(getMoonIllumination(date).phase).toFixed(2);
+  return parseFloat(SunCalc.getMoonIllumination(date).phase).toFixed(2);
 }
 
 function translate(num) {
