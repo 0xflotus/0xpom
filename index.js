@@ -2,9 +2,24 @@
 const SunCalc = require("suncalc");
 const dayjs = require("dayjs");
 const packageName = "0xpom";
+const validDate = /^\d{4}(-|\/)\d\d?\1\d\d?$/;
 
-if (["-h", "--help", "info"].some(e => process.argv.includes(e))) {
-  console.log(`Usage: ${packageName} [date]`);
+if (testFlags(["-h", "--help", "info"])) {
+  console.log(`Usage: ${packageName} [date]
+    -h  help
+    -d  print distance to earth
+    -e  print emoji
+  `);
+} else if (testFlags(["-d"])) {
+  console.log(
+    validDate.test(process.argv[3])
+      ? `${Math.floor(
+          SunCalc.getMoonPosition(
+            dayjs(process.argv[process.argv.indexOf("-d") + 1]).toDate()
+          ).distance
+        )} km`
+      : "With -d flag you must specify a formatted date after the flag"
+  );
 } else {
   if (process.argv[2] === undefined) {
     console.log(todaysValue().name);
@@ -15,9 +30,7 @@ if (["-h", "--help", "info"].some(e => process.argv.includes(e))) {
     ) {
       console.log(todaysValue().emoji);
     } else {
-      if (
-        process.argv.slice(2, 4).some(e => /^\d{4}(-|\/)\d\d?\1\d\d?$/.test(e))
-      ) {
+      if (process.argv.slice(2, 4).some(e => validDate.test(e))) {
         console.log(
           translate(
             getValue(
@@ -32,6 +45,10 @@ if (["-h", "--help", "info"].some(e => process.argv.includes(e))) {
       }
     }
   }
+}
+
+function testFlags(flags) {
+  return flags.some(e => process.argv.includes(e));
 }
 
 function todaysValue() {
