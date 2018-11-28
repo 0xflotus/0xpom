@@ -1,25 +1,38 @@
 #!/usr/bin/env node
 const SunCalc = require("suncalc");
 const dayjs = require("dayjs");
+const packageName = "0xpom";
 
-if (process.argv[2] === undefined) {
-  console.log(translate(getValue(Date.now())).name);
+if (["-h", "--help", "info"].some(e => process.argv.includes(e))) {
+  console.log(`Usage: ${packageName} [date]`);
 } else {
-  if (process.argv[2] === "-e" && process.argv[3] === undefined) {
-    console.log(translate(getValue(Date.now())).emoji);
+  if (process.argv[2] === undefined) {
+    console.log(todaysValue().name);
   } else {
-    if (process.argv.slice(2, 4).some(e => /\d{4}-\d{2}-\d{2}/.test(e))) {
-      console.log(
-        translate(
-          getValue(
-            dayjs(process.argv[process.argv[2] === "-e" ? 3 : 2]).toDate()
-          )
-        )[process.argv.indexOf("-e") > -1 ? "emoji" : "name"]
-      );
+    if (process.argv[2] === "-e" && process.argv[3] === undefined) {
+      console.log(todaysValue().emoji);
     } else {
-      console.log("Wrong format (yyyy-mm-dd)");
+      if (
+        process.argv.slice(2, 4).some(e => /^\d{4}(-|\/)\d\d?\1\d\d?$/.test(e))
+      ) {
+        console.log(
+          translate(
+            getValue(
+              dayjs(process.argv[process.argv[2] === "-e" ? 3 : 2]).toDate()
+            )
+          )[process.argv.indexOf("-e") > -1 ? "emoji" : "name"]
+        );
+      } else {
+        console.log(
+          "Wrong format (yyyy-mm-dd, yyyy/mm/dd, yyyy-m-d, yyyy/m/d)"
+        );
+      }
     }
   }
+}
+
+function todaysValue() {
+  return translate(getValue(Date.now()));
 }
 
 function getValue(date) {

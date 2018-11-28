@@ -1,6 +1,6 @@
 {
   "name": "0xpom-cli",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "main": "index.js",
   "bin": {
     "0xpom": "./index.js"
