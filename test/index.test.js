@@ -32,3 +32,11 @@ test("04 right emoji", () => {
   const { stdout: stdtwo } = execa("0xpom -e 2018-11-30");
   expect(stdtwo).toBe("🌗");
 });
+
+test("05 test three dates in a row", () => {
+  [1, 2, 3]
+    .map(num => execa("0xpom 2018-11-0" + num).stdout)
+    .forEach(e => {
+      expect(e).toBe("Last Quarter");
+    });
+});
