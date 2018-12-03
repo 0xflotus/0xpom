@@ -8,5 +8,9 @@ os:
   - linux
   - osx
   - windows
+before_script:
+  - npm install -g yarn
 script:
   - node index.js 
+after_script:
+  - yarn test
