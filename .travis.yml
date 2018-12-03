@@ -14,4 +14,4 @@ before_script:
 script:
   - node index.js 
 after_script:
-  - yarn test
+  - yarn test || exit 1
