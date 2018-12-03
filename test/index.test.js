@@ -52,3 +52,8 @@ test("07 test -d flag", () => {
   const { stdout } = execa("0xpom -d 2018-11-11");
   expect(stdout).toBe("399157 km");
 });
+
+test("08 wrong format", () => {
+  const { stdout } = execa("0xpom 2018-07/05");
+  expect(stdout).toMatch(/wrong format/i);
+});
