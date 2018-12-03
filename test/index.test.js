@@ -50,7 +50,7 @@ test("06 test help flag", () => {
 
 test("07 test -d flag", () => {
   const { stdout } = execa("0xpom -d 2018-11-11");
-  expect(stdout.split(" ")[0]).toBeGreaterThan(3e5);
+  expect(parseInt.apply({}, stdout.split(" ")[0])).toBeGreaterThan(3e5);
 });
 
 test("08 wrong format", () => {
