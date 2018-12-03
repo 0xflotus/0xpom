@@ -3,3 +3,4 @@ test/
 jest.config.js
 .gitignore
 .travis.yml
+coverage/

@@ -10,6 +10,7 @@ os:
   - windows
 before_script:
   - npm install -g yarn
+  - yarn install
 script:
   - node index.js 
 after_script:
